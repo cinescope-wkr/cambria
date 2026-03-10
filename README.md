@@ -1,4 +1,4 @@
-# Cambrian: Co-Optimizing Vision and Control in MuJoCo
+# Cambria: Co-Optimizing Vision and Control in MuJoCo
 
 Cambrian is a reinforcement-learning framework for end-to-end experiments that jointly optimize locomotion/control policies and visual front-end morphology. It combines MuJoCo simulation, Hydra-driven configuration, Stable-Baselines3 PPO training, and optional evolutionary search over optics-related parameters. The repository is designed for three operating modes: standard policy training, deterministic/controlled evaluation, and parameter search/evolution.
 
