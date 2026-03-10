@@ -1,0 +1,740 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TB8Y1XJVV1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-TB8Y1XJVV1');
+    </script>
+    <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Examples" href="examples/index.html" />
+
+    <link rel="shortcut icon" href="_static/eye.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
+        <title>ACI</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=45624144" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     
+        <a style="text-decoration: none; color: white;"
+           href="https://www.media.mit.edu/groups/camera-culture/overview/">
+           <img src="/ACI/_static/cc-transparent.png"
+                style="
+                    vertical-align: middle;
+                    display: inline;
+                    padding-right: 7.5px;
+                    height: 20px;
+                "/>
+           Checkout Camera Culture!
+        </a>
+     
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">ACI</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/eye.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/eye.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Home</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/detection.html">Detection Task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/navigation.html">Navigation Task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/tracking.html">Tracking Task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/optics.html">Optics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/custom.html">Using Custom Configs</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="usage/index.html">Nuts and Bolts</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Nuts and Bolts</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage/configuration.html">Configuring an Experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/training.html">Training an Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/visualizing.html">Visualizing the Env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/docker.html">Using Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/pitfalls.html">Pitfalls</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference/index.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External Links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/cambrian-org/ACI">Github</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/index.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<section class="tex2jax_ignore mathjax_ignore" id="cambrian-co-optimizing-vision-and-control-in-mujoco">
+<h1>Cambrian: Co-Optimizing Vision and Control in MuJoCo<a class="headerlink" href="#cambrian-co-optimizing-vision-and-control-in-mujoco" title="Link to this heading">¶</a></h1>
+<p>Cambrian is a reinforcement-learning framework for end-to-end experiments that jointly optimize locomotion/control policies and visual front-end morphology. It combines MuJoCo simulation, Hydra-driven configuration, Stable-Baselines3 PPO training, and optional evolutionary search over optics-related parameters. The repository is designed for three operating modes: standard policy training, deterministic/controlled evaluation, and parameter search/evolution.</p>
+<p>This README focuses on practical usage and what can be configured: purpose, implementation, runnable modes, task families, environment parameters, and render modes.</p>
+<section id="fork-and-attribution">
+<h2>Fork and attribution<a class="headerlink" href="#fork-and-attribution" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Original project: <a class="reference external" href="https://github.com/cambrian-org/ACI">Artificial Cambrian Intelligence (ACI)</a>, developed by the original ACI team.</p></li>
+<li><p>This repository is a fork of that project.</p></li>
+<li><p>Maintainer of this fork: Jinwoo Lee (<code class="docutils literal notranslate"><span class="pre">cinescope&#64;kaist.ac.kr</span></code>).</p></li>
+</ul>
+</section>
+<section id="what-this-project-does">
+<h2>What this project does<a class="headerlink" href="#what-this-project-does" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Trains and evaluates agents in MuJoCo environments with multi-agent support.</p></li>
+<li><p>Represents each agent’s perception through an eye module (RGB/depth vision pipeline).</p></li>
+<li><p>Supports biologically inspired optics (pupil, aperture, blur, noise, depth-dependent point-spread) via an <code class="docutils literal notranslate"><span class="pre">Optics</span></code> eye model.</p></li>
+<li><p>Optionally evolves optics-related structure and training hyperparameters with Hydra + Nevergrad.</p></li>
+<li><p>Captures artifacts and reports for reproducibility (checkpoints, videos/images, configs, eval summaries).</p></li>
+</ul>
+</section>
+<section id="high-level-architecture">
+<h2>High-level architecture<a class="headerlink" href="#high-level-architecture" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cambrian/main.py</span></code></strong>: CLI entrypoint (<code class="docutils literal notranslate"><span class="pre">--train</span></code> or <code class="docutils literal notranslate"><span class="pre">--eval</span></code>), Hydra composition, and dispatch.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cambrian/envs/env.py</span></code></strong>: Core environment wrapper (<code class="docutils literal notranslate"><span class="pre">MjCambrianEnv</span></code>) with multi-agent step/reward/done handling.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cambrian/agents/</span></code></strong>: Agent definition and control interfaces.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cambrian/eyes/</span></code></strong>: Base eye, multi-eye, and optics eye implementations.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cambrian/renderer/</span></code></strong>: MuJoCo rendering adapter with support for multiple render and save modes.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cambrian/ml/</span></code></strong>: PPO model wrapper, training loop, constraints, fitness and evolution hooks.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cambrian/configs/</span></code></strong>: Fully declarative experiment definitions via Hydra.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">scripts/</span></code></strong>: Reusable launch templates for training/eval/evolution.</p></li>
+</ul>
+</section>
+<section id="core-design">
+<h2>Core design<a class="headerlink" href="#core-design" title="Link to this heading">¶</a></h2>
+<section id="environment-agent-contract">
+<h3>1) Environment + agent contract<a class="headerlink" href="#environment-agent-contract" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The environment is structured as a vector-like multi-agent interface (<code class="docutils literal notranslate"><span class="pre">obs</span></code>, <code class="docutils literal notranslate"><span class="pre">reward</span></code>, <code class="docutils literal notranslate"><span class="pre">terminated</span></code>, <code class="docutils literal notranslate"><span class="pre">truncated</span></code>, <code class="docutils literal notranslate"><span class="pre">infos</span></code>).</p></li>
+<li><p>Agent control is policy-driven with action spaces defined in <code class="docutils literal notranslate"><span class="pre">agents</span></code> configs.</p></li>
+<li><p>Environment lifecycle supports train/eval modes separately and supports deterministic resets and episode bookkeeping.</p></li>
+</ul>
+</section>
+<section id="perception-stack">
+<h3>2) Perception stack<a class="headerlink" href="#perception-stack" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Eye</span></code> modules produce observations from MuJoCo camera data:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MjCambrianEye</span></code>: single camera, RGB/depth based path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MjCambrianMultiEye</span></code>: configurable eye lattice (<code class="docutils literal notranslate"><span class="pre">lat_range</span></code>, <code class="docutils literal notranslate"><span class="pre">lon_range</span></code>, <code class="docutils literal notranslate"><span class="pre">num_eyes</span></code>) with optional flattening into observation arrays.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MjCambrianOpticsEye</span></code>: optics pipeline including pupil model, aperture model, depth-aware blur, optional Poisson/Gaussian noise, and optional precomputed depth support.</p></li>
+</ul>
+</section>
+<section id="vision-model-and-physics-link">
+<h3>3) Vision model and physics link<a class="headerlink" href="#vision-model-and-physics-link" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Rendering is delegated to <code class="docutils literal notranslate"><span class="pre">cambrian/renderer/renderer.py</span></code>.</p></li>
+<li><p>All rendered observations are standardized through config-driven metadata and output mode selection.</p></li>
+<li><p>Renderer outputs feed directly into policy observation space used by PPO.</p></li>
+</ul>
+</section>
+<section id="trainer-optimization-loop">
+<h3>4) Trainer + optimization loop<a class="headerlink" href="#trainer-optimization-loop" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MjCambrianTrainer</span></code> orchestrates training/evaluation.</p></li>
+<li><p>Uses <code class="docutils literal notranslate"><span class="pre">EvalCallback</span></code>/<code class="docutils literal notranslate"><span class="pre">CheckpointCallback</span></code>-style lifecycle (periodic eval, best-model tracking, periodic saves).</p></li>
+<li><p>Model is SB3 PPO by default (<code class="docutils literal notranslate"><span class="pre">MultiInputPolicy</span></code>, shared defaults are overrideable via config).</p></li>
+<li><p>Checkpoint policy naming and save path are deterministic and organized by experiment run.</p></li>
+</ul>
+</section>
+<section id="evolution">
+<h3>5) Evolution<a class="headerlink" href="#evolution" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Separate evolution pipeline is available and activated through Hydra (<code class="docutils literal notranslate"><span class="pre">evo</span></code> group)</p></li>
+<li><p>Search space is controlled by mutation presets in <code class="docutils literal notranslate"><span class="pre">cambrian/configs/evo/mutations/*.yaml</span></code>.</p></li>
+<li><p>Constraints and penalties can restrict generated candidates before simulation, including optics-morphology and resource limits.</p></li>
+<li><p>Supports generation/rank based runs and distributed launchers via Hydra.</p></li>
+</ul>
+</section>
+</section>
+<section id="modes-of-operation">
+<h2>Modes of operation<a class="headerlink" href="#modes-of-operation" title="Link to this heading">¶</a></h2>
+<section id="standard-training">
+<h3>Standard training<a class="headerlink" href="#standard-training" title="Link to this heading">¶</a></h3>
+<p>Run training with a trainer config and selected task/environment.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>cambrian/main.py<span class="w"> </span>--train<span class="w"> </span><span class="nv">env</span><span class="o">=</span>...<span class="w"> </span><span class="nv">trainer</span><span class="o">=</span>...<span class="w"> </span><span class="nv">task</span><span class="o">=</span>...<span class="w"> </span><span class="o">[</span>+optional<span class="w"> </span>overrides<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="evaluation">
+<h3>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">¶</a></h3>
+<p>Run deterministic or stochastic policy evaluation against a fixed environment config.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>cambrian/main.py<span class="w"> </span>--eval<span class="w"> </span><span class="nv">env</span><span class="o">=</span>...<span class="w"> </span><span class="nv">eval_env</span><span class="o">=</span>...<span class="w"> </span><span class="nv">trainer</span><span class="o">=</span>...<span class="w"> </span><span class="nv">task</span><span class="o">=</span>...<span class="w"> </span><span class="nv">model</span><span class="o">=</span>...<span class="w"> </span><span class="o">[</span>+overrides<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-run-sweeps-hyperparameter-search">
+<h3>Multi-run sweeps / hyperparameter search<a class="headerlink" href="#multi-run-sweeps-hyperparameter-search" title="Link to this heading">¶</a></h3>
+<p>Hydra multi-run is supported for batched experiments.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>cambrian/main.py<span class="w"> </span>--train<span class="w"> </span>-m<span class="w"> </span>hydra/sweeper<span class="o">=</span>...<span class="w"> </span><span class="nv">trainer</span><span class="o">=</span>...<span class="w"> </span><span class="o">[</span>other<span class="w"> </span>overrides<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="evolution-mode">
+<h3>Evolution mode<a class="headerlink" href="#evolution-mode" title="Link to this heading">¶</a></h3>
+<p>Activate evolution/evolver configs to search over parameter space while using PPO as the base learning loop.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>cambrian/main.py<span class="w"> </span>--train<span class="w"> </span>hydra/launcher<span class="o">=</span>...<span class="w"> </span><span class="nv">evo</span><span class="o">=</span>all<span class="w"> </span><span class="nv">trainer</span><span class="o">=</span>...<span class="w"> </span><span class="nv">task</span><span class="o">=</span>...<span class="w"> </span><span class="nv">env</span><span class="o">=</span>...
+</pre></div>
+</div>
+</section>
+</section>
+<section id="command-line-patterns">
+<h2>Command-line patterns<a class="headerlink" href="#command-line-patterns" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--train</span></code> and <code class="docutils literal notranslate"><span class="pre">--eval</span></code> are mutually exclusive.</p></li>
+<li><p>Use Hydra override syntax for any nested key.</p></li>
+<li><p>Most experiments are launchable directly from an experiment alias in <code class="docutils literal notranslate"><span class="pre">cambrian/configs/exp/</span></code>.</p></li>
+<li><p>Typical run scripts under <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> encode stable baselines and launcher-specific environment variables.</p></li>
+</ul>
+</section>
+<section id="experiment-families">
+<h2>Experiment families<a class="headerlink" href="#experiment-families" title="Link to this heading">¶</a></h2>
+<p>The following are validated and documented by config:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">example/navigator</span></code> family</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">navigation.yaml</span></code>: path/navigation benchmark in open mazes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tracking.yaml</span></code>: moving-target tracking with reward shaping.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">detection.yaml</span></code>: detection-style objective with adversarial distractors.</p></li>
+</ul>
+</li>
+<li><p>Cambrian-specific suites</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cambria_detection.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cambria_detection_preview.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cambria_detection_vision_quality.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cambria_detection_diagnostic.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cambria_shallows.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cambria_shallow_vision_quality.yaml</span></code></p></li>
+</ul>
+</li>
+<li><p>Task-level overrides are further specialized in <code class="docutils literal notranslate"><span class="pre">configs/task/</span></code>.</p></li>
+</ul>
+<p>A practical way to browse all variants is <code class="docutils literal notranslate"><span class="pre">configs/exp/</span></code> and the <code class="docutils literal notranslate"><span class="pre">configs/task/*.yaml</span></code> hierarchy.</p>
+</section>
+<section id="environment-configuration-knobs">
+<h2>Environment configuration knobs<a class="headerlink" href="#environment-configuration-knobs" title="Link to this heading">¶</a></h2>
+<section id="core-environment-settings">
+<h3>Core environment settings<a class="headerlink" href="#core-environment-settings" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">frame_skip</span></code>: simulation step multiplier between policy actions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_episode_steps</span></code>: rollout termination horizon.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_eval_episodes</span></code>: number of episodes per evaluation phase.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_envs</span></code>: parallel environments for SB3 vectorized training.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eval_render_mode</span></code>: rendering mode used specifically during evaluation runs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">overlay</span></code> / <code class="docutils literal notranslate"><span class="pre">overlay_options</span></code>: optional on-frame visual overlays.</p></li>
+</ul>
+</section>
+<section id="maze-and-map-based-environments">
+<h3>Maze and map-based environments<a class="headerlink" href="#maze-and-map-based-environments" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Maze tasks are configured through <code class="docutils literal notranslate"><span class="pre">maze_env.yaml</span></code> and concrete map configs.</p></li>
+<li><p>Common map families include</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHALLOWS</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COMPLEX</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OPEN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAZE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NARROW</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maze_num</span></code> / spawn / geometry options are controlled in maze-aware task configs.</p></li>
+</ul>
+</section>
+<section id="agent-configuration">
+<h3>Agent configuration<a class="headerlink" href="#agent-configuration" title="Link to this heading">¶</a></h3>
+<p>Available <code class="docutils literal notranslate"><span class="pre">env.agents</span></code> presets include point/object variants and texturing options.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">agents/point.yaml</span></code> baseline point agent.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">agents/point_cambria.yaml</span></code> Cambria-compatible point baseline.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">agents/point_seeker.yaml</span></code> and seeker variants for task variants.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">agents/object*.yaml</span></code> textured and goal-object variants.</p></li>
+</ul>
+</section>
+<section id="eye-and-optics-presets">
+<h3>Eye and optics presets<a class="headerlink" href="#eye-and-optics-presets" title="Link to this heading">¶</a></h3>
+<p>Under <code class="docutils literal notranslate"><span class="pre">configs/env/agents/eyes/</span></code> and <code class="docutils literal notranslate"><span class="pre">configs/env/agents/eyes/aperture/</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">eye.yaml</span></code>: base eye defaults.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multi_eye.yaml</span></code>: lattice/multi-camera setup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optics.yaml</span></code>: enables optics stack.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aperture/circular.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">aperture/elliptical.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">aperture/mask.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">aperture/aperture.yaml</span></code> for aperture style swaps.</p></li>
+</ul>
+</section>
+</section>
+<section id="render-modes-and-output-formats">
+<h2>Render modes and output formats<a class="headerlink" href="#render-modes-and-output-formats" title="Link to this heading">¶</a></h2>
+<p>Renderer metadata supports</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">human</span></code></p>
+<ul>
+<li><p>usually mapped to live viewer.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rgb_array</span></code></p>
+<ul>
+<li><p>off-screen RGB frame output used by learning and recording.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">depth_array</span></code></p>
+<ul>
+<li><p>depth map stream for depth-aware training and optics diagnostics.</p></li>
+</ul>
+</li>
+</ul>
+<p>Save modes in renderer config include</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NONE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GIF</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MP4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PNG</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WEBP</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USD</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">rgb_array</span></code> is required for frame saving in most modes because video/image writers consume RGB sequences.</p>
+</section>
+<section id="typical-trainer-defaults">
+<h2>Typical trainer defaults<a class="headerlink" href="#typical-trainer-defaults" title="Link to this heading">¶</a></h2>
+<p>Common defaults (can be overridden per experiment)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">trainer.trainer.yaml</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_timesteps</span></code>: <code class="docutils literal notranslate"><span class="pre">500_000</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_envs</span></code>: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_episode_steps</span></code>: <code class="docutils literal notranslate"><span class="pre">256</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trainer.model.model.yaml</span></code></p>
+<ul>
+<li><p>PPO policy: <code class="docutils literal notranslate"><span class="pre">MultiInputPolicy</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_steps</span></code>: <code class="docutils literal notranslate"><span class="pre">2048</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code>: derived from <code class="docutils literal notranslate"><span class="pre">n_steps</span> <span class="pre">*</span> <span class="pre">n_envs</span> <span class="pre">//</span> <span class="pre">32</span></code></p></li>
+<li><p>learning rate: <code class="docutils literal notranslate"><span class="pre">1e-3</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>Cambrian preview/evolution configs often use shorter or custom schedules in <code class="docutils literal notranslate"><span class="pre">configs/exp/cambria_*</span></code>.</p>
+</section>
+<section id="model-and-artifact-outputs">
+<h2>Model and artifact outputs<a class="headerlink" href="#model-and-artifact-outputs" title="Link to this heading">¶</a></h2>
+<p>Training/evaluation runs typically produce:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">checkpoints/</span></code> and <code class="docutils literal notranslate"><span class="pre">best_model</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">policy.pt</span></code> (TorchScript/checkpoint compatibility path)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">eval_config.yaml</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fitness.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">best_fitness.csv</span></code> for evolution/eval pipelines</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eval_env.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">env.xml</span></code> style scene export when enabled</p></li>
+<li><p>rendered videos/images when <code class="docutils literal notranslate"><span class="pre">save_mode</span></code> is enabled</p></li>
+</ul>
+</section>
+<section id="where-to-add-new-experiments">
+<h2>Where to add new experiments<a class="headerlink" href="#where-to-add-new-experiments" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Define or clone an experiment YAML under <code class="docutils literal notranslate"><span class="pre">configs/exp/</span></code>.</p></li>
+<li><p>Compose reusable pieces from <code class="docutils literal notranslate"><span class="pre">base.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">env/</span></code>, <code class="docutils literal notranslate"><span class="pre">task/</span></code>, <code class="docutils literal notranslate"><span class="pre">agent/</span></code>, <code class="docutils literal notranslate"><span class="pre">eyes/</span></code>, <code class="docutils literal notranslate"><span class="pre">renderer/</span></code>, <code class="docutils literal notranslate"><span class="pre">trainer/</span></code>, and <code class="docutils literal notranslate"><span class="pre">evo/</span></code>.</p></li>
+<li><p>Add run aliases or script entries in <code class="docutils literal notranslate"><span class="pre">scripts/</span></code>.</p></li>
+<li><p>Validate via short <code class="docutils literal notranslate"><span class="pre">--train</span></code> runs before long evolution sweeps.</p></li>
+</ol>
+</section>
+<section id="recommended-workflow-for-reproducibility">
+<h2>Recommended workflow for reproducibility<a class="headerlink" href="#recommended-workflow-for-reproducibility" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Keep one canonical base config and apply overrides for each condition.</p></li>
+<li><p>Log every run with the generated <code class="docutils literal notranslate"><span class="pre">run</span></code> directory and store exact Hydra override set.</p></li>
+<li><p>Use deterministic seeds explicitly in task/env/optimizer configs.</p></li>
+<li><p>Prefer short pilot runs before launching multi-GPU / multi-node sweeps.</p></li>
+</ul>
+</section>
+<section id="useful-launch-scripts">
+<h2>Useful launch scripts<a class="headerlink" href="#useful-launch-scripts" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/run.sh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/run_cambria_preview_experiment.sh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/run_cambria_principled_experiment.sh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/run_cambria_signal_experiment.sh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/smoke_test_evo.sh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/run_vast1_train.sh</span></code></p></li>
+</ul>
+</section>
+<section id="repository-structure-at-a-glance">
+<h2>Repository structure (at a glance)<a class="headerlink" href="#repository-structure-at-a-glance" title="Link to this heading">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>configs/
+  base.yaml
+  env/
+  task/
+  trainer/
+  renderer/
+  agent/
+  exp/
+  evo/
+  hydra/
+scripts/
+cambrian/
+  main.py
+  envs/
+  agents/
+  eyes/
+  renderer/
+  ml/
+</pre></div>
+</div>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h2>
+<p>Cambrian is highly config-driven: most behavior changes should be done by editing/overriding YAML rather than changing source code. Use the provided presets as templates and layer overrides for controlled experiments.</p>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>8fc50a08e825bb394f2c017204a9e77e03794462</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="examples/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Examples</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Camera Culture, MIT Media Lab
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Cambrian: Co-Optimizing Vision and Control in MuJoCo</a><ul>
+<li><a class="reference internal" href="#fork-and-attribution">Fork and attribution</a></li>
+<li><a class="reference internal" href="#what-this-project-does">What this project does</a></li>
+<li><a class="reference internal" href="#high-level-architecture">High-level architecture</a></li>
+<li><a class="reference internal" href="#core-design">Core design</a><ul>
+<li><a class="reference internal" href="#environment-agent-contract">1) Environment + agent contract</a></li>
+<li><a class="reference internal" href="#perception-stack">2) Perception stack</a></li>
+<li><a class="reference internal" href="#vision-model-and-physics-link">3) Vision model and physics link</a></li>
+<li><a class="reference internal" href="#trainer-optimization-loop">4) Trainer + optimization loop</a></li>
+<li><a class="reference internal" href="#evolution">5) Evolution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modes-of-operation">Modes of operation</a><ul>
+<li><a class="reference internal" href="#standard-training">Standard training</a></li>
+<li><a class="reference internal" href="#evaluation">Evaluation</a></li>
+<li><a class="reference internal" href="#multi-run-sweeps-hyperparameter-search">Multi-run sweeps / hyperparameter search</a></li>
+<li><a class="reference internal" href="#evolution-mode">Evolution mode</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-line-patterns">Command-line patterns</a></li>
+<li><a class="reference internal" href="#experiment-families">Experiment families</a></li>
+<li><a class="reference internal" href="#environment-configuration-knobs">Environment configuration knobs</a><ul>
+<li><a class="reference internal" href="#core-environment-settings">Core environment settings</a></li>
+<li><a class="reference internal" href="#maze-and-map-based-environments">Maze and map-based environments</a></li>
+<li><a class="reference internal" href="#agent-configuration">Agent configuration</a></li>
+<li><a class="reference internal" href="#eye-and-optics-presets">Eye and optics presets</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#render-modes-and-output-formats">Render modes and output formats</a></li>
+<li><a class="reference internal" href="#typical-trainer-defaults">Typical trainer defaults</a></li>
+<li><a class="reference internal" href="#model-and-artifact-outputs">Model and artifact outputs</a></li>
+<li><a class="reference internal" href="#where-to-add-new-experiments">Where to add new experiments</a></li>
+<li><a class="reference internal" href="#recommended-workflow-for-reproducibility">Recommended workflow for reproducibility</a></li>
+<li><a class="reference internal" href="#useful-launch-scripts">Useful launch scripts</a></li>
+<li><a class="reference internal" href="#repository-structure-at-a-glance">Repository structure (at a glance)</a></li>
+<li><a class="reference internal" href="#notes">Notes</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=3d95f517"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    </body>
+</html>
