@@ -1,6 +1,6 @@
 # Cambria: An Ecosystem for Co-Optimizing and Creating Vision in Silico
 
-Cambrian is a reinforcement-learning framework for end-to-end experiments that jointly optimize locomotion/control policies and visual front-end morphology. It combines MuJoCo simulation, Hydra-driven configuration, Stable-Baselines3 PPO training, and optional evolutionary search over optics-related parameters. The repository is designed for three operating modes: standard policy training, deterministic/controlled evaluation, and parameter search/evolution.
+**Cambria** is a reinforcement-learning framework for end-to-end experiments that jointly optimize locomotion/control policies and visual front-end morphology. It combines MuJoCo simulation, Hydra-driven configuration, Stable-Baselines3 PPO training, and optional evolutionary search over optics-related parameters. The repository is designed for three operating modes: standard policy training, deterministic/controlled evaluation, and parameter search/evolution.
 
 This README focuses on practical usage and what can be configured: purpose, implementation, runnable modes, task families, environment parameters, and render modes.
 
@@ -262,4 +262,6 @@ cambrian/
 
 ## Notes
 
-Cambrian is highly config-driven: most behavior changes should be done by editing/overriding YAML rather than changing source code. Use the provided presets as templates and layer overrides for controlled experiments.
+**Cambria** is currently highly config-driven: most behavior changes should be done by editing/overriding YAML rather than changing source code. Use the provided presets as templates and layer overrides for controlled experiments.
+
+This is a **work-in-progress** repository, which may introduce new capabiltiies including the interactivity. 
