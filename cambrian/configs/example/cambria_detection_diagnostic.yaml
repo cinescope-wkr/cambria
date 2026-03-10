@@ -1,0 +1,17 @@
+# @package _global_
+
+defaults:
+  - cambria_detection_vision_quality
+
+expname: cambria_detection_diagnostic
+
+env:
+  agents:
+    agent:
+      perturb_init_pos: false
+      init_pos: [-8.0, 0.0, null]
+      init_quat: [1.0, 0.0, 0.0, 0.0]
+    goal0:
+      init_pos: [-4.0, -1.0, null]
+    adversary0:
+      init_pos: [-4.0, 1.0, null]

@@ -1,0 +1,6 @@
+defaults:
+  - point_seeker
+
+instance:
+  # Use optimal trajectory when in maze mode
+  use_optimal_trajectory: true

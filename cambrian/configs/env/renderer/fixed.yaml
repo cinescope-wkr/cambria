@@ -1,0 +1,15 @@
+defaults:
+  - renderer
+
+camera:
+  fixedcamid: 0 # use the first camera
+  type: 2 # mjCAMERA_FIXED
+
+scene_options:
+  _target_: hydra_config.utils.instance_wrapper
+  instance:
+    _target_: mujoco.MjvOption
+
+  # Don't visualize the camera frustums
+  flags:
+    mujoco.mjtVisFlag.mjVIS_CAMERA: 0

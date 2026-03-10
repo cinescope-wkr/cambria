@@ -1,0 +1,7 @@
+defaults:
+  - combined
+
+features_extractor_kwargs:
+  image_extractor:
+    _target_: cambrian.ml.features_extractors.PermutedFlattenExtractor
+    _partial_: true

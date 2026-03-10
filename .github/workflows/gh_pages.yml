@@ -1,0 +1,48 @@
+name: Pages
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Step 2: Fetch all history for all tags and branches
+      - name: Fetch all history for all tags and branches
+        run: git fetch --prune
+
+      # Step 3: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      # Step 4: Install dependencies with docs optionals
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .[docs]
+
+      # Step 5: Build Sphinx documentation
+      - name: Build Sphinx documentation
+        run: |
+          sphinx-build -b html docs docs/_build/html
+
+      # Step 6: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
+          publish_branch: gh-pages

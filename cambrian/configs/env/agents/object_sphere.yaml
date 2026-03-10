@@ -1,0 +1,41 @@
+defaults:
+  - object
+
+custom:
+  # Default size of the sphere and the top indicator
+  size: 0.5
+  top_size: ${eval:'${.size} / 2'}
+
+  # Default color is green
+  rgba: 0.2 0.8 0.2 1.0
+  top_rgba: ${.rgba}
+
+xml:
+  _target_: cambrian.utils.cambrian_xml.MjCambrianXML.parse
+  _convert_: all
+  xml_string: ${read:${path:${package:},models,agents,sphere.xml}}
+
+  overrides:
+    - mujoco:
+        - asset:
+            - material:
+                - name: ${parent:xml}_mat
+                - rgba: ${custom:rgba}
+                - emission: 2
+            - material:
+                - name: ${parent:xml}_top_mat
+                - rgba: ${custom:top_rgba}
+                - emission: 2
+        - worldbody:
+            - body:
+                - name: ${parent:xml}_body
+                - geom:
+                    - name: ${parent:xml}_geom
+                    - size: ${custom:size}
+                - site:
+                    - name: ${parent:xml}_top_site
+                    - size: ${custom:top_size}
+                    - pos: 0 0 ${custom:size}
+
+body_name: "${parent:}_body"
+geom_name: "${parent:}_geom"

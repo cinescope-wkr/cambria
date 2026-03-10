@@ -1,0 +1,49 @@
+defaults:
+  - object_sphere
+
+custom:
+  # Must be defined in the custom field
+  frequency: ${oc.select:custom.frequency,"???"}
+
+
+  # Need to define frequency, euler, and rgba of the top indicator
+  # euler: <str>
+  # top_rgba: <float> <float> <float> <float>
+  # texture_cmap: "blackwhite"
+  size: "???"
+  euler: "???"
+  top_rgba: "???"
+  texture_cmap: "redblue"
+  texture: "object_textures/${.texture_cmap}_vertical_${.frequency}.png"
+
+xml:
+  overrides:
+    - mujoco:
+        - worldbody:
+            - body:
+                - name: ${parent:xml}_body
+                - childclass: object
+                - geom:
+                    - name: ${parent:xml}_geom
+                    - size: ${custom:size}
+                    - euler: ${custom:euler}
+                - site:
+                    - name: ${parent:xml}_top_site
+                    - size: ${custom:top_size}
+                    - pos: 0 0 ${custom:size}
+                    - rgba: ${custom:top_rgba}
+        - asset:
+            - texture:
+                - name: "${parent:xml}_tex"
+                # Grabs the texture file from the custom field of the object
+                - file: ${custom:texture}
+                - type: "2d"
+            - material:
+                - name: ${parent:xml}_mat
+                - texture: "${parent:xml}_tex"
+                - emission: 2
+            - material:
+                - name: ${parent:xml}_top_mat
+                # Grabs the rgba from the custom field of the object
+                - rgba: ${custom:top_rgba}
+                - emission: 2

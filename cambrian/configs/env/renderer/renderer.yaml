@@ -1,0 +1,54 @@
+render_modes: [rgb_array]
+
+camera:
+  _target_: hydra_config.utils.instance_wrapper
+  instance:
+    _target_: mujoco.MjvCamera
+
+scene:
+  _target_: hydra_config.utils.instance_wrapper
+  instance:
+    _target_: mujoco.MjvScene
+    _partial_: true
+    maxgeom: 10000
+
+  flags:
+    - 0 # mjRND_SHADOW
+    - 0 # mjRND_WIREFRAME
+    - 0 # mjRND_REFLECTION
+    - 0 # mjRND_ADDITIVE
+    - 0 # mjRND_SKYBOX
+    - 0 # mjRND_FOG
+    - 0 # mjRND_HAZE
+    - 0 # mjRND_SEGMENT
+    - 0 # mjRND_IDCOLOR
+    - 1 # mjRND_CULL_FACE
+
+scene_options:
+  _target_: hydra_config.utils.instance_wrapper
+  instance:
+    _target_: mujoco.MjvOption
+
+  # Visualize the camera frustums
+  flags:
+    _target_: hydra_config.utils.instance_wrapper
+    instance: ${..instance}
+    key: ${parent:}
+    setitem: true
+    locate: true
+    mujoco.mjtVisFlag.mjVIS_CAMERA: 1
+
+  # The env renderer can see all sites and geoms
+  # This is done by setting the _all_ sitegroups and geomgroups to True
+  geomgroup:
+    _target_: hydra_config.utils.instance_wrapper
+    instance: ${..instance}
+    key: ${parent:}
+    setitem: true
+    eval: true
+    slice(None): true
+  sitegroup: ${.geomgroup}
+
+use_shared_context: true
+
+save_mode: WEBP

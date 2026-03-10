@@ -1,0 +1,9 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    parametrization:
+      env.agents.agent.eyes.eye.height_profile_poly_c2:
+        init: ${${parent:}}
+        lower: 0.0
+        upper: 2.0

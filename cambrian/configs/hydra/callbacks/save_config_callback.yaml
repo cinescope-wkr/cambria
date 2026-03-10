@@ -1,0 +1,2 @@
+save_config_callback:
+  _target_: cambrian.ml.callbacks.MjCambrianSaveConfigCallback

@@ -1,0 +1,4 @@
+_target_: cambrian.ml.fitness_fns.fitness_from_monitor
+_partial_: true
+monitor_csv: ${path:${expdir},eval_monitor.csv}
+n_episodes: ${oc.select:eval_env.n_eval_episodes,1}

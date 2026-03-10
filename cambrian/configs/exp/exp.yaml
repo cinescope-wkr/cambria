@@ -1,0 +1,66 @@
+# @package _global_
+
+defaults:
+  # NOTE: there is a bug in OmegaConf that doesn't allow optional dataclass objects
+  # that are inherited to be specified via the defaults list. For instance,
+  # if you have the following structured configs:
+  #
+  # @dataclass
+  # class A:
+  #   a: Optional[int] = None
+  #
+  # @dataclass
+  # class B(A):
+  #   pass
+  #
+  # And you define B in a config file where you specify it's config group such that
+  # OmegaConf thinks it's a structured config, a will always be None unless you
+  # explicitly set it in B. Like if you set a default value to it in A, that won't carry
+  # over to B. This is the case for renderer since it's Optional. Therefore, we define
+  # it here rather than the env config.
+  - /env/renderer: bev
+
+  # Optional config groups for experiments
+  # Defining here means we don't need to have a + when overriding from the command line
+  - optional /exp/constraints: null
+  - optional /exp/mutations: null
+
+trainer:
+  callbacks:
+    eval_callback:
+      # Set the number of eval episodes to the number of mazes in the eval env
+      # NOTE: \$ is used to escape the interpolation so that it's not evaluated
+      # until the callback is called. This is because eval_env may not be defined
+      # when this config is loaded.
+      n_eval_episodes: ${eval_env.n_eval_episodes}
+
+env:
+  # Define the step function for the environment. This is called prior to the
+  # termination, truncation, and reward fns.
+  step_fn:
+    _target_: cambrian.envs.step_fns.step_combined
+    _partial_: true
+
+    step_add_agent_qpos_to_info:
+      _target_: cambrian.envs.step_fns.step_add_agent_qpos_to_info
+      _partial_: true
+
+  # Define the termination, truncation, and reward fns. All will use the combined_*
+  # functions to combine multiple functions into one. Default fns are then added
+  # that _should_ be applied to all sub-configs.
+  termination_fn:
+    _target_: cambrian.envs.done_fns.done_combined
+    _partial_: true
+
+    # Terminate (good) if the max episode steps is exceeded
+    terminate_if_exceeds_max_episode_steps:
+      _target_: cambrian.envs.done_fns.done_if_exceeds_max_episode_steps
+      _partial_: true
+
+  truncation_fn:
+    _target_: cambrian.envs.done_fns.done_combined
+    _partial_: true
+
+  reward_fn:
+    _target_: cambrian.envs.reward_fns.reward_combined
+    _partial_: true

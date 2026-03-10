@@ -1,0 +1,5 @@
+# @package _global_
+
+eval_env:
+  # Run 6 evaluation episodes
+  n_eval_episodes: 6

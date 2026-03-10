@@ -1,0 +1,28 @@
+# @package _global_
+
+defaults:
+  - detection
+  - override /env/mazes@env.mazes.maze: SHALLOWS
+  - override /env/agents@env.agents.agent: point_cambria
+
+env:
+  xml:
+    _target_: cambrian.utils.cambrian_xml.MjCambrianXML.parse
+    _convert_: all
+    xml_string: ${read:${path:${package:},models,scene_shallows.xml}}
+
+  agents:
+    agent:
+      overlay_color: [0.80, 0.96, 0.90, 1.0]
+    goal0:
+      custom:
+        frequency: 20
+        texture_cmap: blackwhite
+        size: 0.45
+      overlay_color: [0.20, 0.82, 0.60, 1.0]
+    adversary0:
+      custom:
+        frequency: 40
+        texture_cmap: blackwhite
+        size: 0.45
+      overlay_color: [0.92, 0.38, 0.38, 1.0]

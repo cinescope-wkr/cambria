@@ -1,0 +1,9 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    parametrization:
+      env.agents.agent.eyes.eye.grin_profile_ctrl_0:
+        init: ${${parent:}}
+        lower: 1.0
+        upper: 2.5

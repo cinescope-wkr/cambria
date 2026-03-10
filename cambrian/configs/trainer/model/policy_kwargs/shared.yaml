@@ -1,0 +1,2 @@
+features_extractor_kwargs:
+  share_image_extractor: true

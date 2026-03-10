@@ -1,0 +1,18 @@
+# @package _global_
+
+# NOTE: Uses a subset of the full search space, like assumes that the optimization is
+# only performed for the longitudinal axis.
+
+hydra:
+  sweeper:
+    optim:
+      # Add a cheap constraint to restrict the number of eyes generated to be
+      # "morphologically feasible"
+      cheap_constraints:
+        morphological_feasibility_small:
+          _target_: cambrian.ml.constraint_fns.nevergrad_constraint_fn
+          _partial_: true
+          fn: cambrian.ml.constraint_fns.constrain_morphologically_feasible_eyes
+          num_eyes_to_generate: env.agents.agent.num_eyes_to_generate
+          resolution: env.agents.agent.eyes.eye.resolution
+          lon_range: env.agents.agent.eyes_lon_range

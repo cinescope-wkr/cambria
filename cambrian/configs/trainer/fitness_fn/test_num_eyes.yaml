@@ -1,0 +1,3 @@
+_target_: cambrian.ml.fitness_fns.fitness_num_eyes
+_partial_: true
+pattern: env.agents.*.num_eyes_to_generate

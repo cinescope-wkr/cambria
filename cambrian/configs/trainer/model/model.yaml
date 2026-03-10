@@ -1,0 +1,11 @@
+defaults:
+  - policy_kwargs: mlp_shared
+
+_target_: cambrian.ml.model.MjCambrianModel
+_partial_: true
+_convert_: all
+
+policy: MultiInputPolicy
+n_steps: 2048
+batch_size: ${eval:'${.n_steps} * ${trainer.n_envs} // 32'}
+learning_rate: 1e-3 # default is 3e-4

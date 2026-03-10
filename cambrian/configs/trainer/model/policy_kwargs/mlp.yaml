@@ -1,0 +1,12 @@
+defaults:
+  - combined
+
+features_extractor_kwargs:
+  image_extractor:
+    _target_: cambrian.ml.features_extractors.MjCambrianMLPExtractor
+    _partial_: true
+    features_dim: 16
+    activation:
+      _target_: torch.nn.Tanh
+      _partial_: true
+    architecture: [4, 8]

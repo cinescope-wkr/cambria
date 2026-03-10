@@ -1,0 +1,11 @@
+defaults:
+  - renderer
+
+width: 1600
+height: 900
+
+camera:
+  azimuth: -62.0
+  elevation: -34.0
+  distance: 1.35
+  lookat: [-13.0, 0.0, 0.2]

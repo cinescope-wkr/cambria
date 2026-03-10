@@ -1,0 +1,18 @@
+defaults:
+  - point_textured
+
+xml:
+  overrides:
+    - mujoco:
+        - worldbody:
+            - body:
+                - name: ${parent:xml}_body
+                - light:
+                    - name: ${parent:xml}_light
+                    - pos: "0 0 0.35"
+                    - diffuse: "0.32 0.46 0.42"
+                    - ambient: "0.04 0.06 0.06"
+                    - specular: "0 0 0"
+                    - cutoff: "90"
+                    - exponent: "1"
+                    - attenuation: "1 0.15 0.05"

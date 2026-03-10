@@ -1,0 +1,17 @@
+defaults:
+  - env
+  - /MjCambrianMazeEnvConfig
+
+n_eval_episodes: ${eval:'max(len(${.mazes}), 1)'}
+
+mazes: {}
+
+instance:
+  _target_: cambrian.envs.MjCambrianMazeEnv
+  _partial_: true
+
+# The maze configuration; will just randomly select a maze from the list by default
+# To add mazes, see the defaults list comment above
+maze_selection_fn:
+  _target_: cambrian.envs.maze_env.MjCambrianMazeStore.select_maze_cycle
+  _partial_: true

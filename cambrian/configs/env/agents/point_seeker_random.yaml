@@ -1,0 +1,7 @@
+defaults:
+  - point_seeker
+
+instance:
+  # Set target to null to enable random target selection
+  target: null
+  speed: -0.9

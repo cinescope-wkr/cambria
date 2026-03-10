@@ -1,0 +1,25 @@
+# @package _global_
+
+defaults:
+  - evo
+
+  - mutations:
+      - optics_aperture_radius
+      - optics_fov
+      - optics_refractive_index
+      - optics_refractive_index_edge
+      - optics_max_height_um
+      - optics_ctrl_0
+      - optics_ctrl_1
+      - optics_ctrl_2
+      - optics_ctrl_3
+      - optics_poly_c2
+      - optics_poly_c4
+      - optics_poly_c6
+      - optics_height_profile_mix
+      - optics_grin_ctrl_0
+      - optics_grin_ctrl_1
+      - optics_grin_ctrl_2
+      - optics_grin_ctrl_3
+
+  - constraints: optics_morphology

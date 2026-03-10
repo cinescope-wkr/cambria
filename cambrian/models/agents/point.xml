@@ -1,0 +1,37 @@
+<mujoco>
+  <include file="cambrian/models/agents/agent.xml" />
+  <asset>
+    <material name="${parent:xml}_mat" emission="1" rgba="0.3 0.6 0.3 1" />
+    <material name="${parent:xml}_direction_mat" emission="1" rgba="0.6 0.3 0.3 1" />
+  </asset>
+  <worldbody>
+    <body name="${parent:xml}_body" pos="0 0 0.2">
+      <!-- Make the alpha very small so it's almost invisible but still visible to mj_ray -->
+      <geom name="${parent:xml}_geom" type="sphere" size="0.2" rgba="0.0 0.0 1.0 0.01"
+        contype="1" friction=".5 .1 .1" density="1000" margin="0.002" condim="1" conaffinity="1" group="2" />
+      <site name="${parent:xml}_site" pos="0.0 0.0 0.0" material="${parent:xml}_mat"
+        size="0.2" />
+      <site name="${parent:xml}_direction_site" group="2" pos="0.3 0.0 0.0"
+        quat="0.5 0.5 0.5 0.5" type="cylinder" material="${parent:xml}_direction_mat"
+        rgba="1.0 0.0 0.0 1.0" size="0.05 0.15" />
+
+      <inertial pos="0 0 0" mass="1" diaginertia="0.1 0.1 0.1" />
+
+      <joint name="${parent:xml}_joint_x" type="slide" pos="0 0 0" axis="1 0 0" damping="1"
+        limited="false" />
+      <joint name="${parent:xml}_joint_y" type="slide" pos="0 0 0" axis="0 1 0" damping="1"
+        limited="false" />
+      <joint name="${parent:xml}_joint_yaw" type="hinge" pos="0 0 0" axis="0 0 1" damping="1"
+        limited="false" />
+    </body>
+  </worldbody>
+  <actuator>
+    <!-- These are just dummy actuators for providing ranges -->
+    <velocity name="${parent:xml}_act_x" joint="${parent:xml}_joint_x" ctrlrange="-10.0 10.0"
+      ctrllimited="true" kv="100" />
+    <velocity name="${parent:xml}_act_y" joint="${parent:xml}_joint_y" ctrlrange="-10.0 10.0"
+      ctrllimited="true" kv="100" />
+    <position name="${parent:xml}_act_yaw" joint="${parent:xml}_joint_yaw" ctrlrange="-3.14 3.14"
+      ctrllimited="true" gear="1" />
+  </actuator>
+</mujoco>

@@ -1,0 +1,15 @@
+defaults:
+  - callbacks
+
+eval_callback:
+  callback_after_eval:
+    callbacks:
+      cambria_multiview_callback:
+        _target_: cambrian.ml.callbacks.MjCambrianMultiViewRenderCallback
+        logdir: ${expdir}
+        fps: 20
+        max_steps: 160
+        deterministic: true
+        scene_subdir: scene
+        vision_subdir: vision
+        optics_subdir: optics

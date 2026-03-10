@@ -1,0 +1,43 @@
+defaults:
+  - eye
+  - /MjCambrianMultiEyeConfig
+
+  - /env/agents/eyes@single_eye: eye
+
+instance:
+  _target_: cambrian.eyes.multi_eye.MjCambrianMultiEye
+  _partial_: true
+
+# Ugly workaround to allow command line arguments to override the single_eye config
+# If we didn't use the private _single_eye attribute, setting from the command line
+# would require appending single_eye to the command line argument; for example, now
+# it's just env.agents.agent.eyes.eye.fov=... instead of
+# env.agents.agent.eyes.eye.single_eye.fov=...
+_single_eye:
+  _target_: hydra_config.utils.merge_with_kwargs
+  _recursive_: false
+  config: ${..single_eye}
+
+  fov: ${..fov}
+  focal: ${..focal}
+  sensorsize: ${..sensorsize}
+  resolution: ${..resolution}
+  coord: ${..coord}
+  orthographic: ${..orthographic}
+
+  renderer:
+    width: ${..resolution.1}
+    height: ${..resolution.0}
+
+fov: ${.single_eye.fov}
+focal: ${.single_eye.focal}
+sensorsize: ${.single_eye.sensorsize}
+resolution: ${.single_eye.resolution}
+coord: ${.single_eye.coord}
+orthographic: ${.single_eye.orthographic}
+
+lat_range: [-5, 5]
+lon_range: [-90, 90]
+num_eyes: [1, 1]
+
+flatten_observations: False

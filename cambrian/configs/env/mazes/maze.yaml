@@ -1,0 +1,17 @@
+xml:
+  _target_: cambrian.utils.cambrian_xml.MjCambrianXML.parse
+  _convert_: all
+  xml_string: ${read:${path:${package:},models,mazes,maze.xml}}
+
+enabled: True
+
+scale: 2.0
+height: 0.5
+hflip: False
+vflip: False
+rotation: 0
+
+wall_texture_map:
+  default: [vertical_10]
+agent_id_map:
+  default: ${oc.dict.keys:env.agents}

@@ -1,0 +1,10 @@
+features_extractor_class:
+  _target_: cambrian.ml.features_extractors.MjCambrianCombinedExtractor
+  _partial_: true
+features_extractor_kwargs:
+  normalized_image: True
+net_arch:
+  pi:
+    - 64
+    - ${.0}
+  vf: ${.pi}

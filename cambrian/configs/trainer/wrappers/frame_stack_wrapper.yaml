@@ -1,0 +1,4 @@
+_target_: gymnasium.wrappers.FrameStackObservation
+_partial_: true
+stack_size: 10
+padding_type: "zero"

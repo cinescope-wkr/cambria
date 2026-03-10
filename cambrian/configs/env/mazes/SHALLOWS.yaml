@@ -1,0 +1,31 @@
+defaults:
+  - maze
+
+xml:
+  _target_: cambrian.utils.cambrian_xml.MjCambrianXML.parse
+  _convert_: all
+  xml_string: ${read:${path:${package:},models,mazes,shallows.xml}}
+
+map: |-
+  [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, R, R, 0, 0, 1, 0, 0, R, R, 0, 1],
+    [1, R, 0, 0, 0, 0, 0, 0, 0, 0, 0, R, 1],
+    [1, 0, 0, 1, 0, R:O, 0, 0, R:O, 0, 1, 0, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
+    [1, R, 0, R:O, 0, 0, 1, 0, 0, R:O, 0, R, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, R:O, 0, 0, 0, R:O, 0, 1, 0, 1],
+    [1, R, 0, 0, 0, 1, 0, 1, 0, 0, 0, R, 1],
+    [1, 0, R, R, 0, 0, 0, 0, 0, R, R, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ]
+
+agent_id_map:
+  O: ${oc.dict.keys:env.agents}
+
+scale: 2.4
+height: 0.35
+
+wall_texture_map:
+  default: [vertical_20, vertical_30]

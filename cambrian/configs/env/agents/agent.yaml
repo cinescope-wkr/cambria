@@ -1,0 +1,31 @@
+defaults:
+  - /MjCambrianAgentConfig
+
+trainable: true
+use_privileged_action: false
+overlay_color: [0, 1, 1, 1]
+overlay_size: 0.1
+
+instance:
+  _target_: cambrian.agents.MjCambrianAgent
+  _partial_: true
+  _convert_: all
+
+xml:
+  _target_: cambrian.utils.cambrian_xml.MjCambrianXML.parse
+  _convert_: all
+  xml_string: ${read:${path:${package:},models,agents,agent.xml}}
+
+check_contacts: ${.use_contact_obs}
+
+# Default configuration is randomly placed depending on the selected environment
+init_pos: [null, null, null]
+init_quat: [null, null, null, null]
+perturb_init_pos: True
+
+# Defaults to using the action and contact observation
+use_action_obs: ${.trainable}
+use_contact_obs: ${.trainable}
+
+# Default configuration is no eyes
+eyes: {}

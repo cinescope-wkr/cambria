@@ -1,0 +1,11 @@
+defaults:
+  - object_sphere_textured
+
+overlay_color: [0.8, 0.2, 0.2, 1]
+
+custom:
+  # Set the top rgb to be red (bad)
+  top_rgba: 0.8 0.2 0.2 1.0
+
+  # Rotate the object by 90 degrees to differentiate between the adversary and goal
+  euler: 0 90 0

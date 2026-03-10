@@ -1,0 +1,14 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    optim:
+      cheap_constraints:
+        total_memory_throughput:
+          _target_: cambrian.ml.constraint_fns.nevergrad_constraint_fn
+          _partial_: true
+          fn: cambrian.ml.constraint_fns.constrain_total_memory_throughput
+          num_eyes_to_generate: env.agents.agent.num_eyes_to_generate
+          resolution: env.agents.agent.eyes.eye.resolution
+          stack_size: trainer.wrappers.frame_stack_wrapper.stack_size
+          max_pixels_in_memory: 300

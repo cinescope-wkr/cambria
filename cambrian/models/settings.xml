@@ -1,0 +1,3 @@
+<mujoco>
+    <compiler assetdir="cambrian/models/assets" angle="degree" coordinate="local" inertiafromgeom="true" />
+</mujoco>

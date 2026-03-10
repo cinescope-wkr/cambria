@@ -1,0 +1,5 @@
+defaults:
+  - slurm
+
+partition: xeon-p8
+constraint: xeon-p8

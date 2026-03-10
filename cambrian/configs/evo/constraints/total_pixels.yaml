@@ -1,0 +1,13 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    optim:
+      cheap_constraints:
+        total_pixels:
+          _target_: cambrian.ml.constraint_fns.nevergrad_constraint_fn
+          _partial_: true
+          fn: cambrian.ml.constraint_fns.constrain_total_pixels
+          num_eyes_to_generate: env.agents.agent.num_eyes_to_generate.1
+          resolution: env.agents.agent.eyes.eye.resolution.0
+          max_num_pixels: 50

@@ -1,0 +1,34 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    optim:
+      cheap_constraints:
+        optics_height_profile:
+          _target_: cambrian.ml.constraint_fns.nevergrad_constraint_fn
+          _partial_: true
+          fn: cambrian.ml.constraint_fns.constrain_height_profile
+          height_profile_mix: env.agents.agent.eyes.eye.height_profile_mix
+          height_profile_ctrl_0: env.agents.agent.eyes.eye.height_profile_ctrl_0
+          height_profile_ctrl_1: env.agents.agent.eyes.eye.height_profile_ctrl_1
+          height_profile_ctrl_2: env.agents.agent.eyes.eye.height_profile_ctrl_2
+          height_profile_ctrl_3: env.agents.agent.eyes.eye.height_profile_ctrl_3
+          height_profile_poly_c2: env.agents.agent.eyes.eye.height_profile_poly_c2
+          height_profile_poly_c4: env.agents.agent.eyes.eye.height_profile_poly_c4
+          height_profile_poly_c6: env.agents.agent.eyes.eye.height_profile_poly_c6
+          max_second_difference: 0.075
+          min_center_minus_edge: 0.0
+        optics_grin_profile:
+          _target_: cambrian.ml.constraint_fns.nevergrad_constraint_fn
+          _partial_: true
+          fn: cambrian.ml.constraint_fns.constrain_grin_profile
+          refractive_index: env.agents.agent.eyes.eye.refractive_index
+          refractive_index_edge: env.agents.agent.eyes.eye.refractive_index_edge
+          grin_profile_ctrl_0: env.agents.agent.eyes.eye.grin_profile_ctrl_0
+          grin_profile_ctrl_1: env.agents.agent.eyes.eye.grin_profile_ctrl_1
+          grin_profile_ctrl_2: env.agents.agent.eyes.eye.grin_profile_ctrl_2
+          grin_profile_ctrl_3: env.agents.agent.eyes.eye.grin_profile_ctrl_3
+          max_second_difference: 0.05
+          min_center_minus_edge: 0.0
+          min_refractive_index: 1.0
+          max_refractive_index: 3.0

@@ -1,0 +1,4 @@
+_target_: cambrian.ml.fitness_fns.fitness_num_eyes_and_fov
+_partial_: true
+num_eyes_pattern: env.agents.*.num_eyes_to_generate
+fov_pattern: env.agents.*.eyes.*.fov[0]

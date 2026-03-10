@@ -1,0 +1,17 @@
+defaults:
+  - agent
+
+# Objects are not trainable. They don't have any observations and don't take any
+# actions.
+trainable: false
+
+# Objects also don't have contact detection
+check_contacts: false
+
+# Don't perturb pose
+perturb_init_pos: False
+
+instance:
+  _target_: cambrian.agents.MjCambrianAgentObject
+  _partial_: true
+  _convert_: all

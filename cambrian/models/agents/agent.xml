@@ -1,0 +1,3 @@
+<mujoco>
+    <include file="cambrian/models/settings.xml" />
+</mujoco>

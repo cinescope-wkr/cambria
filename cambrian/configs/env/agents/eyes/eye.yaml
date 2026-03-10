@@ -1,0 +1,38 @@
+defaults:
+  - /MjCambrianEyeConfig
+  - /env/renderer/renderer@renderer
+
+instance:
+  _target_: cambrian.eyes.eye.MjCambrianEye
+  _partial_: true
+
+fov: [45, 45]
+focal: [0.01, 0.01]
+sensorsize:
+  - ${eval:'2 * ${..focal.0} * math.tan(math.radians(${..fov.0}) / 2)'}
+  - ${eval:'2 * ${..focal.1} * math.tan(math.radians(${..fov.1}) / 2)'}
+resolution: [1, 1]
+coord: [0, 0] # placeholder
+orthographic: False
+
+renderer:
+  render_modes: [rgb_array]
+
+  width: ${..resolution.1}
+  height: ${..resolution.0}
+
+  scene_options:
+    _target_: hydra_config.utils.instance_wrapper
+    instance:
+      _target_: mujoco.MjvOption
+
+    # Don't visualize the camera frustums
+    # Overwrites the default value in the renderer config
+    flags:
+      mujoco.mjtVisFlag.mjVIS_CAMERA: 0
+
+    # We'll hide all the geomgroups and sitegroups at 2
+    # We can then put stuff at groups = 2 and it will be hidden to the agent
+    # Overwrites the default value in the renderer config
+    geomgroup:
+      "2": False

@@ -1,0 +1,14 @@
+<mujoco name="maze">
+    <asset>
+        <material name="floor_mat_${parent:xml}" rgba="0.1 0.1 0.1 1.0" shininess="0.0" specular="0.0" />
+    </asset>
+    <default>
+        <default class="maze_wall_${parent:xml}">
+            <geom type="box" gap="0.05" margin="0.1" group="3" condim="1" />
+        </default>
+    </default>
+    <worldbody>
+        <geom name="floor_${parent:xml}" type="plane" pos="0 0 -0.05" size="0 0 0" material="floor_mat_${parent:xml}"
+            condim="1" group="1" />
+    </worldbody>
+</mujoco>

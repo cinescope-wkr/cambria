@@ -1,0 +1,7 @@
+defaults:
+  - combined
+
+features_extractor_kwargs:
+  image_extractor:
+    _target_: stable_baselines3.common.torch_layers.FlattenExtractor
+    _partial_: true

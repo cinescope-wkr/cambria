@@ -1,0 +1,2 @@
+_target_: cambrian.utils.wrappers.MjCambrianTorchToNumpyWrapper
+_partial_: true

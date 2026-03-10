@@ -1,0 +1,65 @@
+defaults:
+  - eye
+  - /MjCambrianOpticsEyeConfig
+  - aperture: circular
+
+instance:
+  _target_: cambrian.eyes.MjCambrianOpticsEye
+  _partial_: true
+
+# Set the sensorsize to be fixed
+sensorsize: [8e-3, 8e-3] # 8mm x 8mm
+
+# Calculate the focal length based on the fov and sensors
+focal:
+  - ${eval:'${..sensorsize.0} / (2 * math.tan(math.radians(${..fov.0}) / 2))'}
+  - ${eval:'${..sensorsize.1} / (2 * math.tan(math.radians(${..fov.1}) / 2))'}
+
+# Set fixed for now
+pupil_resolution: [101, 101]
+
+noise_std: 0
+wavelengths: [610e-9, 530e-9, 470e-9]
+
+# Flat profiles remain optically neutral; evolution is driven by non-flat radial
+# profiles and GRIN gradients.
+f_stop: 2.0
+sensor_distance: null
+refractive_index: 1.5
+refractive_index_edge: ${.refractive_index}
+height_map: ${eval:'[0.5] * ${.pupil_resolution.0}'}
+max_height_um: 1.0
+height_profile_ctrl: [0.5, 0.5, 0.5, 0.5]
+height_profile_poly: [0.0, 0.0, 0.0]
+height_profile_mix: 0.5
+height_profile_ctrl_0: 0.5
+height_profile_ctrl_1: 0.5
+height_profile_ctrl_2: 0.5
+height_profile_ctrl_3: 0.5
+height_profile_poly_c2: 0.0
+height_profile_poly_c4: 0.0
+height_profile_poly_c6: 0.0
+grin_profile_ctrl: ${eval:'[${.refractive_index}] * 4'}
+grin_profile_ctrl_0: ${.refractive_index}
+grin_profile_ctrl_1: ${.refractive_index}
+grin_profile_ctrl_2: ${.refractive_index}
+grin_profile_ctrl_3: ${.refractive_index}
+scale_intensity: False
+
+# Pre-compute the psf at specific depths. This will speed up the simulation speed at the
+# cost of accuracy of the psf at any given depth
+depths:
+  - ${eval:'sum([${..focal.0}, ${..focal.1}]) / 2 * 5'}
+  - ${eval:'sum([${..focal.0}, ${..focal.1}]) / 2 * 10'}
+  - ${eval:'sum([${..focal.0}, ${..focal.1}]) / 2 * 100'}
+  - ${eval:'sum([${..focal.0}, ${..focal.1}]) / 2 * 1000'}
+  - ${eval:'sum([${..focal.0}, ${..focal.1}]) / 2 * 10000'}
+
+renderer:
+  render_modes: [rgb_array, depth_array]
+
+  # Update the renderer to use a padded resolution. Right now, it's set
+  # to be larger than the pupil plane, but probably not required. This is the
+  # "scene" resolution.
+  width: ${eval:'${..pupil_resolution.0} * 2 + 1'}
+  height: ${eval:'${..pupil_resolution.1} * 2 + 1'}

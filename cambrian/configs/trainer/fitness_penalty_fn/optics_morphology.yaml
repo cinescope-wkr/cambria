@@ -1,0 +1,10 @@
+_target_: cambrian.ml.fitness_penalty_fns.optics_morphology_penalty
+_partial_: true
+penalty_scale: 1000.0
+height_roughness_weight: 1.0
+grin_roughness_weight: 1.0
+concavity_weight: 5.0
+edge_bulge_weight: 5.0
+refractive_bounds_weight: 10.0
+min_refractive_index: 1.0
+max_refractive_index: 3.0

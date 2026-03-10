@@ -1,0 +1,111 @@
+# @package _global_
+
+# This task is similar to light_seeking, but has a goal _and_ adversary. The
+# config must set `custom.frequency` to the frequency of the texture
+# that should be applied to the objects. By default, the textures are synchronized
+# between the goal and adversary, but this can be overridden by setting
+# env.agents.<object name>.custom.frequency directly for each object.
+
+defaults:
+  # Use one maze for the time being
+  - /env/mazes@env.mazes.maze: OPEN
+
+  # Use the maze_task config as the base
+  - maze_task
+
+  # Define one point agent with a single eye
+  - /env/agents@env.agents.agent: point
+  - /env/agents/eyes@env.agents.agent.eyes.eye: multi_eye
+
+  # Define two objects: a goal and an adversary
+  - /env/agents@env.agents.goal0: object_sphere_textured_goal
+  - /env/agents@env.agents.adversary0: object_sphere_textured_adversary
+
+custom:
+  # This sets both the frequency of the texture of the goal and adversary
+  # The goal and adversary textures are the same, just rotated 90 degrees relative
+  # to one another
+  frequency: 8
+
+env:
+  mazes:
+    maze:
+      scale: 2.0
+      agent_id_map:
+        default: ${glob:agent*,${oc.dict.keys:env.agents}}
+        O: ${glob:goal*|adversary*,${oc.dict.keys:env.agents}}
+
+  reward_fn:
+    reward_if_done:
+      _target_: cambrian.envs.reward_fns.reward_fn_done
+      _partial_: true
+      scale_by_quickness: true
+      termination_reward: 1.0
+      truncation_reward: ${eval:'-${.termination_reward}'}
+      disable_on_max_episode_steps: true
+      for_agents: ${glob:agent*,${oc.dict.keys:env.agents}}
+
+    penalize_if_has_contacts:
+      _target_: cambrian.envs.reward_fns.reward_fn_has_contacts
+      _partial_: true
+      reward: -1.0
+      for_agents: ${glob:agent*,${oc.dict.keys:env.agents}}
+
+  truncation_fn:
+    truncate_if_close_to_adversary:
+      _target_: cambrian.envs.done_fns.done_if_close_to_agents
+      _partial_: true
+      for_agents: ${glob:agent*,${oc.dict.keys:env.agents}}
+      to_agents: ${glob:adversary*,${oc.dict.keys:env.agents}}
+      distance_threshold: 1.0
+
+  termination_fn:
+    terminate_if_close_to_goal:
+      _target_: cambrian.envs.done_fns.done_if_close_to_agents
+      _partial_: true
+      for_agents: ${glob:agent*,${oc.dict.keys:env.agents}}
+      to_agents: ${glob:goal*,${oc.dict.keys:env.agents}}
+      distance_threshold: 1.0
+
+eval_env:
+  step_fn:
+    # respawn the goal or adversary if the agent is close to it
+    # this subsequently means that agents which avoid the adversary more often are
+    # far more likely to be selected for (i.e. they are better agents)
+    respawn_objects_if_agent_close:
+      _target_: cambrian.envs.step_fns.step_respawn_agents_if_close_to_agents
+      _partial_: true
+      for_agents: ${glob:goal*|adversary*,${oc.dict.keys:env.agents}}
+      to_agents: ${glob:agent*,${oc.dict.keys:env.agents}}
+      distance_threshold: 1.0
+
+  reward_fn:
+    reward_if_goal_respawned:
+      _target_: cambrian.envs.reward_fns.reward_fn_agent_respawned
+      _partial_: true
+      # large positive reward for respawning the goal (which happens if the agent is
+      # close to it)
+      reward: 10.0
+      for_agents: ${glob:goal*,${oc.dict.keys:env.agents}}
+      scale_by_quickness: true
+
+    penalize_if_adversary_respawned:
+      _target_: cambrian.envs.reward_fns.reward_fn_agent_respawned
+      _partial_: true
+      # large negative reward for respawning the adversary (which happens if the agent
+      # is close to it)
+      reward: -20.0
+      for_agents: ${glob:adversary*,${oc.dict.keys:env.agents}}
+      scale_by_quickness: true
+
+    penalize_if_has_contacts:
+      # large negative reward for contacts
+      reward: -2.0
+
+  truncation_fn:
+    truncate_if_close_to_adversary:
+      disable: True
+
+  termination_fn:
+    terminate_if_close_to_goal:
+      disable: True

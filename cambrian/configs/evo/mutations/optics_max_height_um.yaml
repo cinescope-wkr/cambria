@@ -1,0 +1,9 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    parametrization:
+      env.agents.agent.eyes.eye.max_height_um:
+        init: ${${parent:}}
+        lower: 0.0
+        upper: 12.0

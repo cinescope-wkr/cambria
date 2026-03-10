@@ -1,0 +1,8 @@
+defaults:
+  # Set to use submitit
+  - /hydra/launcher/submitit_local@_here_
+
+# Set the timeout of each individual job to 1 day. Note that this isn't the total job
+# length. It is recommended to start the "daemon" job using srun/sbatch on a low
+# compute node. This way, you can limit the total job length to some maximum value.
+timeout_min: ${eval:'60*24'} # 1 day (in min)

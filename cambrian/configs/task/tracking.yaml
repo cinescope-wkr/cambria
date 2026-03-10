@@ -1,0 +1,27 @@
+# @package _global_
+
+# This task is for tracking of an object. It's similar to detection, but the object(s)
+# move.
+
+defaults:
+  # Inherit the config from detection
+  - detection
+
+  # Override the goal and adversary, which both move around the map
+  - override /env/agents@env.agents.goal0:
+      - object_sphere_textured_goal
+      - point_textured
+      - point_seeker_random
+  - override /env/agents@env.agents.adversary0:
+      - object_sphere_textured_adversary
+      - point_textured
+      - point_seeker_random
+
+env:
+  agents:
+    goal0:
+      trainable: false
+      overlay_color: [0.2, 0.8, 0.2, 1]
+    adversary0:
+      trainable: false
+      overlay_color: [0.8, 0.2, 0.2, 1]

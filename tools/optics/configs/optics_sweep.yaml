@@ -1,0 +1,55 @@
+defaults:
+  - base
+
+  - override task: detection
+  - override /env/agents/eyes@env.agents.agent.eyes.eye.single_eye: optics
+
+  - _self_
+
+expname: optics_sweep
+
+trainer:
+  max_episode_steps: 200
+
+  wrappers:
+    constant_action_wrapper:
+      # have the agent be stationary
+      constant_actions:
+        0: -1
+        1: 0
+
+env:
+  debug_overlays_size: 0.6
+
+  agents:
+    agent:
+      perturb_init_pos: False
+      init_pos: [-8, 0, null]
+
+      eyes:
+        eye:
+          resolution: [100, 100]
+          fov: [90, 45]
+
+    goal0:
+      init_pos: [-4, -1, null]
+    adversary0:
+      init_pos: [-4, 1, null]
+
+  renderer:
+    save_mode: MP4
+    camera:
+      distance: 0.33
+      azimuth: -30
+      elevation: -15
+      lookat:
+        - ${env.agents.agent.init_pos.0}
+        - ${env.agents.agent.init_pos.1}
+        - -1.5
+
+eval_env:
+  n_eval_episodes: 1
+
+hydra:
+  searchpath:
+    - pkg://cambrian/configs

@@ -1,0 +1,10 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    parametrization:
+      env.agents.agent.eyes.eye.num_eyes:
+        init: ${${parent:}}
+        lower: 1
+        upper: 100
+        integer: true

@@ -1,0 +1,7 @@
+defaults:
+  - aperture
+  - /MjCambrianMaskApertureConfig
+
+mask: [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
+
+randomize: False

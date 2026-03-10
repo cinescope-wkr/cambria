@@ -1,0 +1,3 @@
+_target_: cambrian.ml.fitness_fns.fitness_from_txt
+_partial_: true
+txt_file: ${path:${expdir},evaluations,vision_quality.txt}

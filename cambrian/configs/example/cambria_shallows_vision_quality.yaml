@@ -1,0 +1,17 @@
+# @package _global_
+
+defaults:
+  - cambria_shallows
+  - override /trainer/fitness_fn: vision_quality
+
+expname: cambria_shallows_vision_quality
+
+env:
+  agents:
+    agent:
+      eyes:
+        eye:
+          aperture:
+            radius: 0.75
+          scale_intensity: false
+          noise_std: 0.005

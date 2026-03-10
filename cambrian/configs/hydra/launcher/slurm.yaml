@@ -1,0 +1,29 @@
+defaults:
+  # Set to use submitit_slurm
+  - /hydra/launcher/submitit_slurm@_here_
+
+# Set the timeout of each individual job to 1 day. Note that this isn't the total job
+# length. It is recommended to start the "daemon" job using srun/sbatch on a low
+# compute node. This way, you can limit the total job length to some maximum value.
+timeout_min: ${eval:'60*24'} # 1 day (in min)
+
+# For each job, we'll allocate 1 node and a single GPU (since stable baselines3
+# doesn't support multi-gpu. We'll then enable multiple trainers on each node relative
+# to the number of CPUs given. We'll then launch many of these jobs in parallel to
+# facilitate parallel config trainers (i.e. manage a population).
+# NOTE: I'm unsure the best way to allocate gpus/cpus (like how many of each we want
+# to use). We'll set by default 20 total cpus per job.
+nodes: 1
+tasks_per_node: ${eval:'int(20 // ${.cpus_per_task})'}
+cpus_per_task: ${trainer.n_envs}
+mem_per_cpu: 6G
+
+# number of parallel array jobs launched
+array_parallelism: ${eval:'int(${oc.select:evo.population_size, 16} // ${.tasks_per_node})'}
+
+# these are run prior to calling sbatch before running the job
+setup:
+  - source /etc/profile
+  - export TF_CPP_MIN_LOG_LEVEL=2
+  - export OPENBLAS_NUM_THREADS=1
+  - export PMIX_MCA_gds=hash

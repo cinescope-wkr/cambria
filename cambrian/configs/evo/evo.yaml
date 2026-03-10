@@ -1,0 +1,25 @@
+# @package _global_
+
+defaults:
+  # Set the sweeper to nevergrad
+  - override /hydra/sweeper: evolution_nevergrad
+
+# Update the seed based on the current generation and rank such that each agent's is
+# unique
+seed: |
+  ${eval:'${trainer.n_envs} * (${evo.generation} * ${evo.population_size} + ${evo.rank})'}
+
+# Update the subdir to use the generation and rank syntax
+expsubdir: generation_${evo.generation}/rank_${evo.rank}
+
+# Now, update the evo variables
+evo:
+  # How many agents are in a single generation.
+  population_size: 4
+
+  # The rank is essentially the unique id for an agent within a generation.
+  rank: ${eval:'int(${hydra_select:job.num, 0} % ${.population_size})'}
+
+  # The current generation of the agent, and the total number of generations to run.
+  num_generations: 50
+  generation: ${eval:'int(${hydra_select:job.num, 0} // ${.population_size})'}

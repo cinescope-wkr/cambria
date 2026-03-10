@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=./hydra.yaml
+
+defaults:
+  - callbacks:
+      - log_job_return_callback
+      - save_config_callback
+  - override job_logging: basic
+
+run:
+  dir: ${path:${expdir},hydra,run,${now:%H-%M-%S}}
+sweep:
+  dir: ${logdir}
+  subdir: ${path:${expsubdir},hydra,sweep,${now:%H-%M-%S}}
+job:
+  name: ${expname}

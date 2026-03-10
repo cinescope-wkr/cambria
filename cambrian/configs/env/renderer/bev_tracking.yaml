@@ -1,0 +1,6 @@
+defaults:
+  - tracking
+  - bev
+
+camera:
+  distance: 0.5

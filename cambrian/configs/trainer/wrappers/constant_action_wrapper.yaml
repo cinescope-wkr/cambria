@@ -1,0 +1,4 @@
+_target_: cambrian.utils.wrappers.MjCambrianConstantActionWrapper
+_partial_: true
+# Defaults to having no constant actions
+constant_actions: {}

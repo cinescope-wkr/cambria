@@ -1,0 +1,40 @@
+<mujoco model="scene_shallows">
+    <include file="cambrian/models/settings.xml" />
+    <option integrator="implicitfast" timestep="0.02">
+        <flag frictionloss="disable" />
+    </option>
+    <visual>
+        <headlight active="0" />
+        <map znear="0.0001" zfar="8" />
+        <scale frustum="24" />
+        <rgba camera="0.45 0.72 0.70 1" />
+        <quality offsamples="4" />
+    </visual>
+    <worldbody>
+        <camera
+            name="cambria_overview"
+            pos="0 -8.4 6.2"
+            xyaxes="1 0 0 0 0.64 0.77"
+        />
+        <light
+            name="surface_key"
+            pos="0 0 8"
+            dir="0 0 -1"
+            directional="true"
+            diffuse="0.75 0.92 0.88"
+            ambient="0.18 0.24 0.24"
+            specular="0.10 0.10 0.10"
+            castshadow="false"
+        />
+        <light
+            name="surface_fill"
+            pos="-6 4 6"
+            dir="0.25 -0.15 -1"
+            directional="true"
+            diffuse="0.28 0.40 0.46"
+            ambient="0.05 0.08 0.10"
+            specular="0.0 0.0 0.0"
+            castshadow="false"
+        />
+    </worldbody>
+</mujoco>

@@ -1,0 +1,31 @@
+defaults:
+  - maze
+
+map: |
+  [
+    [1:L, 1:E, 1:R],
+    [1:L,   R, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L,   0, 1:R],
+    [1:L, R:O, 1:R],
+    [1:L, 1:E, 1:R],
+  ]
+
+scale: 4.0
+
+wall_texture_map:
+  L: [vertical_10]
+  R: [vertical_10]
+  E: [vertical_10]
+
+agent_id_map:
+  O: ${oc.dict.keys:env.agents}

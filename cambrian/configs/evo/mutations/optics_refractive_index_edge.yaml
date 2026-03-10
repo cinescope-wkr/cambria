@@ -1,0 +1,9 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    parametrization:
+      env.agents.agent.eyes.eye.refractive_index_edge:
+        init: ${${parent:}}
+        lower: 1.0
+        upper: 2.0

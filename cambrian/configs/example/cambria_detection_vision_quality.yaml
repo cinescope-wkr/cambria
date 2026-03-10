@@ -1,0 +1,30 @@
+# @package _global_
+
+defaults:
+  - example
+  - override /task: cambria_detection
+  - override /trainer/callbacks: cambria_multiview
+  - override /trainer/fitness_fn: vision_quality
+  - override /env/renderer: cambria_static
+  - override /env/agents/eyes@env.agents.agent.eyes.eye: optics
+
+expname: cambria_detection_vision_quality
+
+env:
+  add_overlays: false
+  debug_overlays_size: 0.0
+  agents:
+    agent:
+      eyes:
+        eye:
+          resolution: [48, 48]
+          pupil_resolution: [81, 81]
+          fov: [60, 40]
+          aperture:
+            radius: 0.85
+          noise_std: 0.003
+          scale_intensity: false
+          max_height_um: 1.5
+
+trainer:
+  max_episode_steps: 192

@@ -1,0 +1,6 @@
+defaults:
+  - aperture
+  - /MjCambrianEllipticalApertureConfig
+
+radius_x: 0.5
+radius_y: 0.3

@@ -1,0 +1,11 @@
+defaults:
+  - combined
+
+features_extractor_kwargs:
+  image_extractor:
+    _target_: cambrian.ml.features_extractors.MjCambrianNatureCNNExtractor
+    _partial_: true
+    features_dim: 256
+    activation:
+      _target_: torch.nn.Tanh
+      _partial_: true

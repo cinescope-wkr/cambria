@@ -1,0 +1,9 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    parametrization:
+      env.agents.agent.eyes.eye.fov:
+        init: ${${parent:}}
+        lower: 10
+        upper: 140

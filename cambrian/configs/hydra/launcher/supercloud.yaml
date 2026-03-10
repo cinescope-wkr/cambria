@@ -1,0 +1,19 @@
+defaults:
+  - slurm
+
+# Supercloud only allows allocation of 40 cpus and 8 gpus at any one time. To optimize
+# usage of resources, we want to use all 40 cpus and 8 gpus and also have multiple
+# parallel workers on each node. This can manifest in a few ways:
+#   - we could have multiple parallel environments running on the same node which
+#     provides more training samples per update at the cost of sample efficiency
+#   - or we could have multiple trainers running on the same node which provides more
+#     updates per time at the cost of compute efficiency
+# We'll dynamically select the number of tasks_per_node (i.e. the number of trainers
+# running on each node) based on the number of parallel environments each trainer.
+# Each supercloud node only has 40 cpus, so we'll set the number of tasks_per_node to
+# 20 // cpus_per_task. This will allow us to run the maximum number of trainers on each
+# node while still allowing for another trainer to run on the same node. In this way,
+# there will be 8 total trainers running on each node (1 per gpu, each with 20 cpus).
+gres: gpu:volta:1
+partition: xeon-g6-volta
+constraint: xeon-g6

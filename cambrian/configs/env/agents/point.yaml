@@ -1,0 +1,14 @@
+defaults:
+  - agent
+
+instance:
+  _target_: cambrian.agents.MjCambrianAgentPoint
+  _partial_: true
+
+xml:
+  _target_: cambrian.utils.cambrian_xml.MjCambrianXML.parse
+  _convert_: all
+  xml_string: ${read:${path:${package:},models,agents,point.xml}}
+
+body_name: "${parent:}_body"
+geom_name: "${parent:}_geom"

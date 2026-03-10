@@ -1,0 +1,57 @@
+defaults:
+  # Specify the config group (i.e. the class to instantiate this config as)
+  - /MjCambrianConfig
+
+  # Ordered such that subsequent defaults override self
+  - _self_
+
+  - env: env
+  - optional evo: null
+  - optional evo/mutations: null
+  - optional evo/constraints: null
+  - trainer: trainer
+  - hydra: hydra
+
+  # We require a task. Optionally can specify an exp which should define the task
+  # explicitly
+  - task: "???"
+  - exp: exp
+
+  # Add optional overlay or example configs here
+  - overlay: null
+  - example: null
+
+  # Here we override the default launcher. Note that this only impacts
+  # when multi-run is used. By default, we'll specify the local launcher (which is
+  # based on submitit_local). See those respective configs for
+  # more information.
+  - override /hydra/launcher: local
+
+logdir: ${path:logs,${now:%Y-%m-%d},${expname}}
+expdir: ${path:${logdir},${expsubdir}}
+expsubdir: "" # by default, the data will be stored in the logdir
+expname: ${hydra_select:runtime.choices.exp}_${hydra_select:runtime.choices.task}
+
+seed: 0
+
+# Not as easy as adding env@eval_env: ${env} to the defaults list because some required
+# args are set in the downstream exp configs and these aren't carried over to eval_env
+# when just loading the default env config. We use a utility function merge the config
+# from downstream eval_env's into ${env} at instantiate rather than resolution. If we
+# just set eval_env: ${env}, ${env} would resolve when these overrides are applied and
+# any overrides of env in that config or downstream configs wouldn't be present in
+# eval_env.
+# NOTE: Instantiated configs are instantiated _before_ merge_with_kwargs is called.
+# Therefore, we need to specify _recursive_: false so `config` isn't instantiated early.
+# Then, in merge_with_kwargs, we instantiate the config.
+eval_env:
+  _target_: hydra_config.utils.merge_with_kwargs
+  _recursive_: false
+  config: ${env}
+
+  # Define any ${env} interpolations used in subsequent configs expicitly here,
+  # otherwise you'll get an interpolation error since eval_env isn't evaluated until
+  # instantiation.
+  n_eval_episodes: ${env.n_eval_episodes}
+
+  save_filename: "eval"

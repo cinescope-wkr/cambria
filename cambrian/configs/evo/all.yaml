@@ -1,0 +1,12 @@
+# @package _global_
+
+defaults:
+  - evo
+
+  - mutations:
+      - resolution
+      - num_eyes
+      - lon_range
+      - lat_range
+      - stack_size
+      - fov

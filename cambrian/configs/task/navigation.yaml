@@ -1,0 +1,93 @@
+# @package _global_
+
+# This task is for navigation. It defines a set of mazes which the agent must navigate.
+# The agent is rewarded based on it's movement from its initial position. The agent
+# is penalized if it makes contact with the walls of the maze. A
+# termination condition indicates success, and in this case, the agent is successful if
+# it reaches the goal (within a certain distance threshold).
+
+defaults:
+  # Use one fairly complicated maze
+  - /env/mazes@env.mazes.maze: COMPLEX
+
+  # Use the maze_task config as the base
+  - maze_task
+
+  # Define one point agent with a single eye
+  - /env/agents@env.agents.agent: point
+  - /env/agents/eyes@env.agents.agent.eyes.eye: multi_eye
+
+  # Define one goal object
+  - /env/agents@env.agents.goal: object_sphere
+
+env:
+  agents:
+    goal:
+      custom:
+        size: 0.25
+
+  # Update the scale of the maze so that it's more difficult
+  mazes:
+    maze:
+      agent_id_map:
+        default: ${glob:agent*,${oc.dict.keys:env.agents}}
+        E: ${glob:agent*,${oc.dict.keys:env.agents}}
+        O: ${glob:goal*,${oc.dict.keys:env.agents}}
+
+  reward_fn:
+    reward_if_done:
+      _target_: cambrian.envs.reward_fns.reward_fn_done
+      _partial_: true
+      termination_reward: 1.0
+      truncation_reward: ${eval:'-${.termination_reward}'}
+      disable_on_max_episode_steps: true
+      for_agents: ${glob:agent*,${oc.dict.keys:env.agents}}
+      scale_by_quickness: true
+
+    euclidean_delta_to_goal:
+      _target_: cambrian.envs.reward_fns.reward_fn_euclidean_delta_to_agent
+      _partial_: true
+      reward: 0.1
+      for_agents: ${glob:agent*,${oc.dict.keys:env.agents}}
+      to_agents: ${glob:goal*,${oc.dict.keys:env.agents}}
+
+    penalize_if_has_contacts:
+      _target_: cambrian.envs.reward_fns.reward_fn_has_contacts
+      _partial_: true
+      reward: -0.1
+      for_agents: ${glob:agent*,${oc.dict.keys:env.agents}}
+
+  truncation_fn:
+    truncate_if_low_reward:
+      _target_: cambrian.envs.done_fns.done_if_low_reward
+      _partial_: true
+      threshold: -50.0
+
+  termination_fn:
+    terminate_if_close_to_goal:
+      _target_: cambrian.envs.done_fns.done_if_close_to_agents
+      _partial_: true
+      for_agents: ${glob:agent*,${oc.dict.keys:env.agents}}
+      to_agents: ${glob:goal*,${oc.dict.keys:env.agents}}
+      distance_threshold: 1.0
+
+eval_env:
+  mazes:
+    maze:
+      agent_id_map:
+        # Update the default map such that the agent is only placed on R:E spaces
+        default: []
+
+  reward_fn:
+    reward_if_done:
+      termination_reward: 10.0
+
+    euclidean_delta_to_goal:
+      reward: 2.0
+
+    penalize_if_has_contacts:
+      reward: -1.0
+
+  truncation_fn:
+    truncate_if_low_reward:
+      disable: true

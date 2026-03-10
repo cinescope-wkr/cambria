@@ -1,0 +1,11 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    parametrization:
+      trainer.wrappers.frame_stack_wrapper.stack_size:
+        init: ${${parent:}}
+        lower: 1
+        step: 1
+        upper: 20
+        integer: true

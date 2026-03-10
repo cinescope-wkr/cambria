@@ -1,0 +1,5 @@
+defaults:
+  - aperture
+  - /MjCambrianCircularApertureConfig
+
+radius: 0.0

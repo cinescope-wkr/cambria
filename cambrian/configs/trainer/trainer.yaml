@@ -1,0 +1,17 @@
+defaults:
+  - model: model
+  - callbacks: callbacks
+  - fitness_fn: eval_monitor
+  - optional fitness_penalty_fn: null
+
+  - wrappers@wrappers.agent_env_wrapper: single_agent_env_wrapper
+  - wrappers@wrappers.torch_to_numpy_wrapper: torch_to_numpy_wrapper
+  - wrappers@wrappers.frame_stack_wrapper: frame_stack_wrapper
+  - wrappers@wrappers.constant_action_wrapper: constant_action_wrapper
+
+total_timesteps: 500_000
+max_episode_steps: 256
+n_envs: 1
+
+prune_fn: null
+fitness_penalty_fn: null

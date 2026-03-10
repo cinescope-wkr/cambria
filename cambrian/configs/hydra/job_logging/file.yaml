@@ -1,0 +1,21 @@
+defaults:
+  - logging
+
+handlers:
+  file_out:
+    class: cambrian.utils.logger.MjCambrianFileHandler
+    formatter: simple
+    filename: ${expdir}/logs/out.log
+    level: DEBUG
+    mode: w
+  file_err:
+    class: cambrian.utils.logger.MjCambrianFileHandler
+    formatter: simple
+    filename: ${expdir}/logs/err.log
+    level: WARNING
+    mode: w
+    filters: [once_filter]
+loggers:
+  cambrian:
+    level: DEBUG
+    handlers: [file_out, file_err]

@@ -1,0 +1,4 @@
+# @package _global_
+
+# Update the expsubdir to include all the overrides
+expsubdir: ${clean_overrides:${hydra_select:overrides.task, []},'overlays=sweep'}

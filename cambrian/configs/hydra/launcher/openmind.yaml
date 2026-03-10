@@ -1,0 +1,10 @@
+defaults:
+  - slurm
+
+# Request 1 GPU per trainer
+gres: gpu:1
+
+# Setting the qos/partition to the lab name (i.e. cbmm) has the highest priority (10).
+# `normal` is 5 and `use-everything` is 0.
+qos: normal
+partition: normal

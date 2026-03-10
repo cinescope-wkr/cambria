@@ -1,0 +1,37 @@
+# @package _global_
+
+defaults:
+  - example
+  - override /task: cambria_detection
+  - override /trainer/callbacks: cambria_multiview
+  - override /trainer/fitness_fn: vision_quality
+  - override /env/renderer: cambria_static
+  - override /env/agents/eyes@env.agents.agent.eyes.eye: optics
+
+expname: cambria_detection_preview
+
+env:
+  add_overlays: false
+  debug_overlays_size: 0.0
+  agents:
+    agent:
+      eyes:
+        eye:
+          resolution: [40, 40]
+          pupil_resolution: [41, 41]
+          fov: [60, 40]
+          aperture:
+            radius: 0.9
+          noise_std: 0.002
+          scale_intensity: false
+          max_height_um: 1.2
+          depths:
+            - ${eval:'sum([${..focal.0}, ${..focal.1}]) / 2 * 5'}
+            - ${eval:'sum([${..focal.0}, ${..focal.1}]) / 2 * 50'}
+            - ${eval:'sum([${..focal.0}, ${..focal.1}]) / 2 * 500'}
+
+trainer:
+  total_timesteps: 4000
+  max_episode_steps: 96
+  model:
+    n_steps: 256

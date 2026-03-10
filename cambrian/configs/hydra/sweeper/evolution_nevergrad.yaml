@@ -1,0 +1,107 @@
+defaults:
+  # We use nevergrad for the evolution strategy
+  - /hydra/sweeper/nevergrad@_here_
+
+# NOTE: hydra sweepers are _not_ asynchronous in that it will wait until all workers are
+# finished before selecting the next parameters to optimize over. For example, when
+# using the submitit_slurm launcher with num_workers=4, all 4 jobs will be run and
+# synchronously waited for all to finish until moving on. This may not be desired.
+# Possible work arounds:
+# 1. use a different launcher which requires one worker from the sweeper
+#    this would involve writing a custom launcher tho I think
+# 2. run more workers than the number of jobs you want to run in parallel. this means
+#    they will effectively wait in the queue until the next job is ready to run
+#    which is kind of asynchronous. Problem would be that each job that is queued
+#    wasn't "intellegently" selected by the sweeper.
+# 3. make a PR for hydra adding support for asynchronous launches. See this comment:
+#    https://github.com/facebookresearch/hydra/blame/main/plugins/\
+#       hydra_nevergrad_sweeper/hydra_plugins/hydra_nevergrad_sweeper/_impl.py#L162
+
+# NOTE #2: The nevergrad sweeper does not expose the contraint API for nevergrad, so
+# it's not possible to have cheap constraints defined prior to objective calculations.
+# As in if you want to define constraints, you have to include them as heavy penalties
+# in the objective function, which may not be ideal if the objective function is
+# expensive. See other sweepers for how to define constraints.
+
+optim:
+  optimizer: "CambrianCMARS"
+
+  # This seed is only used at the very beginning and is used for reproducibility of the
+  # nevergrad algorithm, not of the individual runs. We'll set it to 0 here instead of
+  # ${seed} because otherwise we get an error saying that the hydra config is unset
+  # since the sweeper is evaluated before the hydra config is parsed/set.
+  seed: 0
+
+  # Here we assume we want to maximize the fitness returned by trainer. This may not
+  # always be the case, but can be overridden in the downstream configs.
+  maximize: true
+
+  # This defines the number of a parallel candidates you want to test at one time.
+  # This will default to 1 for most launchers.
+  num_workers: ${oc.select:evo.population_size, 1}
+
+  # We expect the same input parameters to produce different output fitness due to
+  # seeds and randomness in the training process. Therefore, we set noisy to true.
+  noisy: true
+
+  # The budget is the number of evaluations we want to run. The total number of
+  # generations is the budget divided by the number of workers. We'll set the
+  # number generations and calculate the budget from that. Default generations to 20.
+  # NOTE: If budget is not a direct multiple of num_workers, at the end, the sweeper
+  # will run the remaining number of workers to reach the budget, which messes with
+  # our current generation calculation.
+  # NOTE #2: Some algorithms use the budget and num_workers as part of the optimization
+  # to know how exploratory to be. So be careful setting this number very large with
+  # the intention of stopping early.
+  budget: ${eval:'int(${oc.select:evo.num_generations, 1} * ${.num_workers})'}
+
+  # Set the max failures to be equivalent to one node's worth of workers. This is
+  # because if one node fails, we want to be able to restart the job with the same
+  # parameters on a different node. Subtract 1e-6 so that max_failure_rate is never 1.0.
+  max_failure_rate: ${eval:'${oc.select:hydra.launcher.tasks_per_node, 1} / ${oc.select:evo.population_size, 1} - 1e-6'}
+
+  # Load the nevergrad pkl, if it exists. This makes resuming a failed evo possible.
+  load_if_exists: ${path:${logdir},nevergrad.pkl}
+
+  callbacks:
+    # Add a parameters logger callback. We can use this to get lineage info and use
+    # hiplot to make tree-like plots.
+    parameters_logger:
+      name: tell
+      callback:
+        _target_: nevergrad.callbacks.ParametersLogger
+
+        # The output is saved to the log directory which is the base of the evolution
+        # And note, logs will always overwrite the previous logs.
+        filepath: ${path:${logdir},nevergrad.log}
+        append: False
+    optimizer_dump:
+      name: tell
+      callback:
+        _target_: nevergrad.callbacks.OptimizerDump
+
+        # The output is saved to the log directory which is the base of the evolution
+        # And note, logs will always overwrite the previous logs.
+        filepath: ${path:${logdir},nevergrad.pkl}
+    generation_best_logger:
+      name: tell
+      callback:
+        _target_: cambrian.ml.callbacks.MjCambrianNevergradBestLogger
+        jsonl_path: ${path:${logdir},nevergrad_best.jsonl}
+        csv_path: ${path:${logdir},nevergrad_best_per_generation.csv}
+        append: False
+    progress_bar:
+      name: tell
+      callback:
+        _target_: nevergrad.callbacks.ProgressBar
+    # This will print out the best agent after each generation
+    optimization_logger:
+      name: tell
+      callback:
+        _target_: nevergrad.callbacks.OptimizationLogger
+    # Stop the optimization if the best agent hasn't improved in the last 10 generations
+    # no_improvement_stopper:
+    #   name: ask
+    #   callback:
+    #     _target_: nevergrad.callbacks.EarlyStopping.no_improvement_stopper
+    #     tolerance_window: ${eval:'${oc.select:evo.population_size, 1} * 10'}

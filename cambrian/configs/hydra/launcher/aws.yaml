@@ -1,0 +1,94 @@
+_target_: hydra_plugins.hydra_ray_launcher.ray_aws_launcher.RayAWSLauncher
+env_setup:
+  pip_packages:
+    omegaconf: ${ray_pkg_version:omegaconf}
+    hydra_core: ${ray_pkg_version:hydra}
+    ray: ${ray_pkg_version:ray}
+    cloudpickle: ${ray_pkg_version:cloudpickle}
+    git+https://github.com/AaronYoung5/hydra.git@main#subdirectory=plugins/hydra_ray_launcher: null
+    git+https://github.com/AaronYoung5/hydra.git@main#subdirectory=plugins/hydra_joblib_launcher: null
+  commands:
+    - curl -L -O \
+        "https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mambaforge-24.3.0-0-Linux-x86_64.sh"
+    - /bin/bash Mambaforge-24.3.0-0-Linux-x86_64.sh -b -p "$HOME/anaconda3" || true
+    - $HOME/anaconda3/bin/mamba create -n hydra_env python=3.12 -y
+    - echo 'export PATH="$HOME/anaconda3/envs/hydra_env/bin:$PATH"' >> ~/.bashrc
+    - python --version
+    - which python
+ray:
+  init:
+    address: null
+  remote: {}
+  cluster:
+    cluster_name: default
+    min_workers: 0
+    upscaling_speed: 1.0
+    max_workers: 1
+    idle_timeout_minutes: 5
+    docker:
+      image: ""
+      container_name: ""
+      pull_before_run: true
+      run_options: []
+    provider:
+      type: aws
+      region: us-east-2
+      availability_zone: us-east-2a,us-east-2b
+      cache_stopped_nodes: false
+      key_pair:
+        key_name: hydra-${oc.env:USER,user}
+    auth:
+      ssh_user: ec2-user
+    available_node_types:
+      ray.head.default:
+        resources: {}
+        node_config:
+          InstanceType: t3.micro
+          ImageId: ami-0b297f7b4efe3fa87
+      ray.worker.default:
+        min_workers: 0
+        max_workers: 2
+        resources: {}
+        node_config:
+          InstanceType: t3.micro
+          ImageId: ami-0b297f7b4efe3fa87
+          InstanceMarketOptions:
+            MarketType: spot
+    head_node_type: ray.head.default
+    file_mounts: {}
+    initialization_commands: []
+    cluster_synced_files: []
+    setup_commands: []
+    head_setup_commands: []
+    worker_setup_commands: []
+    head_start_ray_commands:
+      - ray stop
+      - ulimit -n 65536;ray start --head --port=6379 --object-manager-port=8076 \
+          --autoscaling-config=~/ray_bootstrap_config.yaml
+    worker_start_ray_commands:
+      - ray stop
+      - ulimit -n 65536; ray start --address=$RAY_HEAD_IP:6379 --object-manager-port=8076
+  run_env:
+    name: auto
+stop_cluster: true
+sync_up:
+  source_dir: null
+  target_dir: null
+  include: []
+  exclude: []
+sync_down:
+  source_dir: null
+  target_dir: null
+  include: ["*.log"]
+  exclude: []
+logging:
+  log_style: auto
+  color_mode: auto
+  verbosity: 0
+create_update_cluster:
+  no_restart: false
+  restart_only: false
+  no_config_cache: true
+teardown_cluster:
+  workers_only: false
+  keep_min_workers: false

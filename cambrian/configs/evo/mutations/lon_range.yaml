@@ -1,0 +1,9 @@
+# @package _global_
+
+hydra:
+  sweeper:
+    parametrization:
+      env.agents.agent.eyes.eye.lon_range:
+        init: ${${parent:}}
+        lower: -180
+        upper: 180

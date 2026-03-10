@@ -1,0 +1,41 @@
+# TODO: Make dictionary and instantiate in python to make it more readable and
+# overridable?
+
+eval_callback:
+  _target_: cambrian.ml.callbacks.MjCambrianEvalCallback
+  _partial_: true
+  eval_env: "???" # required arg
+  n_eval_episodes: "???" # must be set in the exp config
+  best_model_save_path: ${expdir}
+  log_path: ${expdir}
+  deterministic: true
+  render: True
+  eval_freq: 10000
+  verbose: 0
+
+  callback_after_eval:
+    _target_: cambrian.ml.callbacks.MjCambrianCallbackListWithSharedParent
+    _convert_: all
+    callbacks:
+      stop_training_on_no_improvement_callback:
+        _target_: stable_baselines3.common.callbacks.StopTrainingOnNoModelImprovement
+        max_no_improvement_evals: 3 # n_envs * check_freq * max_no_improvement_evals steps
+        min_evals: 0 # n_envs * check_freq * min_no_improvement_evals steps
+      stop_training_on_reward_threshold_callback:
+        _target_: stable_baselines3.common.callbacks.StopTrainingOnRewardThreshold
+        reward_threshold: 1e3
+      plot_monitor_callback:
+        _target_: cambrian.ml.callbacks.MjCambrianPlotMonitorCallback
+        logdir: ${expdir}
+        filename: monitor
+      plot_evaluations_callback:
+        _target_: cambrian.ml.callbacks.MjCambrianPlotMonitorCallback
+        logdir: ${expdir}
+        filename: eval_monitor
+        n_episodes: ${....n_eval_episodes}
+      save_policy_callback:
+        _target_: cambrian.ml.callbacks.MjCambrianSavePolicyCallback
+        logdir: ${expdir}
+
+progress_bar_callback:
+  _target_: cambrian.ml.callbacks.MjCambrianProgressBarCallback

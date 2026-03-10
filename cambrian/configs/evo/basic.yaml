@@ -1,0 +1,13 @@
+# @package _global_
+#
+# Minimal evo config used to populate the optional `evo` structured config when
+# users override `evo.*` fields from the CLI without selecting an evo config.
+#
+# This file intentionally does *not* override the Hydra sweeper/launcher or other
+# global settings. For sweep-driven evolution, use `evo=evo`.
+
+evo:
+  population_size: 4
+  num_generations: 1
+  rank: 0
+  generation: 0

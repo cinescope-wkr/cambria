@@ -1,0 +1,29 @@
+# @package _global_
+
+defaults:
+  - example
+  - override /task: cambria_tracking
+  - override /trainer/callbacks: cambria_multiview
+  - override /env/renderer: cambria_static
+  - override /env/agents/eyes@env.agents.agent.eyes.eye: optics
+
+expname: cambria_shallows
+
+env:
+  add_overlays: false
+  debug_overlays_size: 0.0
+  agents:
+    agent:
+      eyes:
+        eye:
+          resolution: [48, 48]
+          fov: [72, 54]
+          aperture:
+            radius: 0.55
+          noise_std: 0.01
+          scale_intensity: true
+
+trainer:
+  callbacks:
+    eval_callback:
+      render: false

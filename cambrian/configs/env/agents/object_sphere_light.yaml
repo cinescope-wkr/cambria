@@ -1,0 +1,21 @@
+defaults:
+  - object_sphere
+
+xml:
+  overrides:
+    - mujoco:
+        - worldbody:
+            - body:
+                - name: ${parent:xml}_body
+                - light:
+                    - name: ${parent:xml}_light
+                    - class: object
+        - asset:
+            - material:
+                - name: ${parent:xml}_mat
+                - rgba: 1.0 1.0 1.0 1.0
+                - emission: 1
+            - material:
+                - name: ${parent:xml}_top_mat
+                - rgba: 0.2 0.8 0.2 1.0
+                - emission: 1

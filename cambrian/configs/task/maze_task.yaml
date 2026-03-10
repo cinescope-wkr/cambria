@@ -1,0 +1,10 @@
+# @package _global_
+
+defaults:
+  # Load the task config as the base
+  - task
+
+  # Override the default environment to be a maze_env. We are using mazes above, and so
+  # we need to specify the environment base which corresponds to the maze environment.
+  # This will also register the env config group as an MjCambrianMazeEnvConfig
+  - override /env: maze_env
